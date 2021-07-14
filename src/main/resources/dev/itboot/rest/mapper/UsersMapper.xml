@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.itboot.rest.mapper.UsersMapper">
+
+<select id="checkUserAlreadyExist" resultType="Integer">
+	SELECT COUNT(*)
+FROM users
+WHERE user_name = #{userName}
+AND   password = #{password}
+</select>
+
+<select id="fetchLoginUserData" resultType="String">
+		SELECT task_name FROM task WHERE user_name = #{userName};
+</select>
+
+<insert id="insertUserInfo">
+		INSERT INTO users(user_name, password) VALUES (#{userName}, #{password})
+</insert>
+
+</mapper>

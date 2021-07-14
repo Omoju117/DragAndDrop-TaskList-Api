@@ -1,0 +1,44 @@
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: dev.itboot.mb.model
+  mapper-locations: classpath*:/dev/itboot/mb/mapper/TaskMapper.xml
+#spring:
+#  sql:
+#    init:
+#      platform: h2
+server:
+  port: 5000
+---
+#  config:
+#    activate:
+#      on-profile: dev
+#  profiles:
+#    active: dev
+spring:
+  sql:
+    init:
+      mode: always
+#  jpa:
+#    database: MYSQL
+#  datasource:
+#      url: jdbc:mysql://aa95jvnl4camab.c24wcvafvnyz.ap-northeast-1.rds.amazonaws.com:3306/ebdb
+#      username: admin
+#      password: 
+
+  jpa:
+    database: POSTGRESQL
+  datasource:
+      url: jdbc:postgresql://testdb.c24wcvafvnyz.ap-northeast-1.rds.amazonaws.com:5432/testdb
+      username: postgres
+      password: 6xx3819edgLdtRTILpxq
+      hikari: 
+        maximum-pool-size: 10
+        
+
+#  datasource:
+#      url: jdbc:postgresql://localhost:5432/dnd_tasklist
+#      username: endokazuki
+#      password:
+#server: 
+#  port: 9000
