@@ -1,6 +1,7 @@
 package dev.itboot.rest.controller;
 
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +34,18 @@ public class UsersController {
 	
 	@PostMapping("/signUp")
 	String signUp(@RequestBody Users user) {
+		cHandler.setLevel(Level.SEVERE);
+		logger.addHandler(cHandler);
 		try {
 			System.out.println(user.getUserName() + ":" + user.getPassword());
 			if(service.checkUserAlreadyExist(user) == 0) {
 				service.insertUserInfo(user);
-				System.out.println("Save is completed");
 			} else {
-				System.out.println("targetUser is Already Exists");
 				return gson.toJson("ErrorCode:001");
 			}
 		} catch(Exception e) {
 			System.out.println("DB Access Error");
+			logger.log(Level.SEVERE,"error: " , e);
 			return gson.toJson(false);
 		}
 			
@@ -52,6 +54,8 @@ public class UsersController {
 	
 	@PostMapping("/signIn")
 	String[] signIn(@RequestBody Users user) {
+		cHandler.setLevel(Level.SEVERE);
+		logger.addHandler(cHandler);
 		String[] fetchedData = new String[0];
 		try {
 			// ユーザーが登録されていなかった場合
@@ -61,6 +65,7 @@ public class UsersController {
 			fetchedData = service.fetchLoginUserData(user);
 		} catch(Exception e) {
 			System.out.println("DB Access Error");
+			logger.log(Level.SEVERE,"error: " , e);
 		}
 		return fetchedData;
 	}
